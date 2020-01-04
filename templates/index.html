@@ -63,27 +63,5 @@
     </div>
   </div>
 
-
-
-  <!-- Mark Modal -->
-  <div class="modal fade" id="mark-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-body">
-          <h1 align='center'>Mark as done?</h1>
-        </div>
-        <div class="modal-footer">
-          <form method="post">
-            {% csrf_token %}
-            <input type="submit" name="yes" value="Yes" class="btn btn-success mx-2">
-            <input type="submit" name="no" value="No" class="btn btn-warning">
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-
 </body>
 </html>
