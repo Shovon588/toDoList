@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Delete Item</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  </head>
+  <body>
+
+    <div class="container">
+      <div class="jumbotron mt-5 bg-danger">
+        <h3 align='center'>{{item.item}}</h3>
+        <h5 align='center' class="mt-2">Added on: {{item.time|date:"M-d-Y"}} at {{item.time|date:"h:i A"}}</h5>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="jumbotron mt-5">
+        <h1 align='center'>Are you sure you want to delete?</h1>
+        <center>
+          <form method="post">
+            {% csrf_token %}
+            <p class="mt-5"> <input type="submit" value="No" class="btn btn-danger btn-lg mx-3" name='no'> <input type="submit" class="btn btn-success btn-lg" value="Yes" name='yes'></p>
+          </form>
+        </center>
+      </div>
+    </div>
+  </body>
+</html>
