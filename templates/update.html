@@ -15,7 +15,7 @@
           {% csrf_token %}
           <center>
           <div class="form-group">
-            <textarea class="list-form form-control w-50" rows="5" id="comment" placeholder="Add an Item" name="item">{{data}}</textarea>
+            <textarea class="list-form form-control w-50" rows="5" id="comment" placeholder="Add an Item" name="item">{{data.item}}</textarea>
           </div>
           <input type="submit" value="Update" class="mt-3 btn btn-success">
         </center>

@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from list.models import Item
+from list.models import Item, UserIP
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib import messages
@@ -9,23 +9,21 @@ from datetime import datetime
 
 
 def index(request):
-    items = Item.objects.all().order_by('-done', 'time')[::-1]
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+
+    user = UserIP.objects.get_or_create(ip=ip)[0]
+    print(user)
+
+    items = Item.objects.filter(user=user).order_by('done', 'time')
     context = {'data': items}
 
-    if request.method == 'POST':
-        try:
-            item = request.POST.get('item')
-            Item.objects.create(item=item, time=datetime.now())
-        except:
-            pass
-
-        try:
-            if request.POST.get('yes'):
-                item = 'YES'
-
-            print(item)
-        except:
-            pass
+    if request.method=='POST':
+        item = request.POST.get("item")
+        Item.objects.create(user=user, item=item)
 
         return HttpResponseRedirect(reverse('list:index'))
 
