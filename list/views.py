@@ -10,13 +10,13 @@ from datetime import datetime
 
 def index(request):
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+
     if x_forwarded_for:
         ip = x_forwarded_for.split(',')[0]
     else:
         ip = request.META.get('REMOTE_ADDR')
 
     user = UserIP.objects.get_or_create(ip=ip)[0]
-    print(user)
 
     items = Item.objects.filter(user=user).order_by('done', 'time')
     context = {'data': items}
